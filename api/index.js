@@ -1,5 +1,5 @@
 // ============================================
-// BACKEND IMPLEMENTATION - HAPPY SOUL
+// BACKEND IMPLEMENTATION - THE ALCHEMY OF LIVING
 // ============================================
 
 const express = require('express');
@@ -15,13 +15,13 @@ const app = express();
 // =======================
 app.use(helmet());
 app.use(cors({
-    origin: '*',
+    origin: '*', // Allow all for now, adjust for your domain
     credentials: true
 }));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
-// Rate limit
+// Rate limit: Prevent spamming
 const emailLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     max: 5,
@@ -36,14 +36,15 @@ const emailLimiter = rateLimit({
 // =======================
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
-    port: 587,
-    secure: false,
+    port: 587, // TLS port
+    secure: false, // STARTTLS upgrade
     auth: {
-        user: 'happysoulmotivator@gmail.com',
-        pass: 'dbgc qfja ldep kgyh'
+        user: 'lifenavigatorpratima@gmail.com',
+        pass: 'uhog uwyy wfzy bwyw'
     }
 });
 
+// Verify transporter config
 transporter.verify((error) => {
     if (error) {
         console.error('❌ Email config error:', error);
@@ -58,16 +59,16 @@ transporter.verify((error) => {
 const getEnquiryEmailTemplate = (data) => {
     return {
         admin: {
-            subject: `New Product Enquiry - ${data.productName} - Happy Soul`,
+            subject: `New Product Enquiry - ${data.productName} - The Alchemy of Living`,
             html: `
-                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
-                    <div style="background: linear-gradient(135deg, #a78bfa, #facc15); padding: 20px; text-align: center;">
-                        <h1 style="color: white; margin: 0; font-size: 26px; font-weight: bold;">Happy Soul</h1>
-                        <p style="color: #fef9c3; margin: 5px 0 0; font-size: 14px; font-style: italic;">
-                            Mindfulness & Life Coaching
+                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #eee; border-radius: 8px; overflow: hidden;">
+                    <div style="background: linear-gradient(135deg, #ff7e5f, #feb47b); padding: 20px; text-align: center;">
+                        <h1 style="color: white; margin: 0; font-size: 26px; font-weight: bold;">The Alchemy of Living</h1>
+                        <p style="color: #fff8f0; margin: 5px 0 0; font-size: 14px; font-style: italic; font-family: 'Georgia', serif;">
+                            Life Coaching with Pratima
                         </p>
                     </div>
-                    <div style="padding: 20px; background: #faf5ff;">
+                    <div style="padding: 20px; background: #f8fafc;">
                         <h3 style="margin-top:0; color: #333; font-size: 20px;">📩 New Product Enquiry</h3>
                         <table style="width:100%; border-collapse: collapse; font-size: 15px;">
                             <tr style="background: #fff;">
@@ -77,13 +78,13 @@ const getEnquiryEmailTemplate = (data) => {
                             <tr style="background: #f9f9f9;">
                                 <td style="padding: 10px; font-weight: bold; color: #444;">📧 Email:</td>
                                 <td style="padding: 10px;">
-                                    <a href="mailto:${data.email}" style="color: #a78bfa; text-decoration: none;">${data.email}</a>
+                                    <a href="mailto:${data.email}" style="color: #ff7e5f; text-decoration: none;">${data.email}</a>
                                 </td>
                             </tr>
                             <tr style="background: #fff;">
                                 <td style="padding: 10px; font-weight: bold; color: #444;">📱 Phone:</td>
                                 <td style="padding: 10px;">
-                                    <a href="tel:${data.phone}" style="color: #a78bfa; text-decoration: none;">${data.phone}</a>
+                                    <a href="tel:${data.phone}" style="color: #ff7e5f; text-decoration: none;">${data.phone}</a>
                                 </td>
                             </tr>
                             <tr style="background: #f9f9f9;">
@@ -97,37 +98,37 @@ const getEnquiryEmailTemplate = (data) => {
                         </table>
                     </div>
                     <div style="background: #1e293b; padding: 15px; text-align: center;">
-                        <p style="color: white; margin: 0; font-size: 14px;">&copy; 2025 Happy Soul. All rights reserved.</p>
-                        <p style="color: #94a3b8; margin: 5px 0 0; font-size: 12px;">Mindfulness & Life Coaching</p>
+                        <p style="color: white; margin: 0; font-size: 14px;">&copy; 2025 The Alchemy of Living. All rights reserved.</p>
+                        <p style="color: #94a3b8; margin: 5px 0 0; font-size: 12px;">Life Coaching with Pratima</p>
                     </div>
                 </div>
             `
         },
         user: {
-            subject: `Thank You for Your Enquiry - Happy Soul`,
+            subject: `Thank You for Your Enquiry - The Alchemy of Living`,
             html: `
-                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
-                    <div style="background: linear-gradient(135deg, #a78bfa, #facc15); padding: 20px; text-align: center;">
-                        <h1 style="color: white; margin: 0; font-size: 26px; font-weight: bold;">Happy Soul</h1>
-                        <p style="color: #fef9c3; margin: 5px 0 0; font-size: 14px; font-style: italic;">
-                            Mindfulness & Life Coaching
+                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #eee; border-radius: 8px; overflow: hidden;">
+                    <div style="background: linear-gradient(135deg, #ff7e5f, #feb47b); padding: 20px; text-align: center;">
+                        <h1 style="color: white; margin: 0; font-size: 26px; font-weight: bold;">The Alchemy of Living</h1>
+                        <p style="color: #fff8f0; margin: 5px 0 0; font-size: 14px; font-style: italic; font-family: 'Georgia', serif;">
+                            Life Coaching with Pratima
                         </p>
                     </div>
-                    <div style="padding: 25px; background: #faf5ff; line-height: 1.6; color: #333;">
-                        <h2 style="color: #a78bfa; margin-top: 0;">🙏 Thank You for Reaching Out!</h2>
+                    <div style="padding: 25px; background: #f8fafc; line-height: 1.6; color: #333;">
+                        <h2 style="color: #ff7e5f; margin-top: 0;">🙏 Thank You for Reaching Out!</h2>
                         <p>Dear ${data.name},</p>
-                        <p>Thank you for showing interest in <strong style="color: #a78bfa;">${data.productName}</strong> at <strong>Happy Soul</strong>.</p>
+                        <p>Thank you for showing interest in <strong style="color: #ff7e5f;">${data.productName}</strong> at <strong>The Alchemy of Living</strong>.</p>
                         <p>We have received your enquiry and our team will get back to you within <strong>1-2 business days</strong>.</p>
-                        <div style="margin: 20px 0; padding: 15px; background: #fff; border-left: 4px solid #a78bfa; border-radius: 5px;">
+                        <div style="margin: 20px 0; padding: 15px; background: #fff; border-left: 4px solid #ff7e5f; border-radius: 5px;">
                             <p style="margin: 0;"><strong>Need help sooner?</strong><br>
-                            📧 <a href="mailto:happysoulmotivator@gmail.com" style="color: #a78bfa; text-decoration: none;">happysoulmotivator@gmail.com</a></p>
+                            📧 <a href="mailto:lifenavigatorpratima@gmail.com" style="color: #ff7e5f; text-decoration: none;">lifenavigatorpratima@gmail.com</a></p>
                         </div>
                         <p>Warm regards,<br>
-                        <strong style="color: #a78bfa;">Happy Soul Team</strong></p>
+                        <strong style="color: #ff7e5f;">The Alchemy of Living Team</strong></p>
                     </div>
                     <div style="background: #1e293b; padding: 15px; text-align: center;">
-                        <p style="color: white; margin: 0; font-size: 14px;">&copy; 2025 Happy Soul. All rights reserved.</p>
-                        <p style="color: #94a3b8; margin: 5px 0 0; font-size: 12px;">Mindfulness & Life Coaching</p>
+                        <p style="color: white; margin: 0; font-size: 14px;">&copy; 2025 The Alchemy of Living. All rights reserved.</p>
+                        <p style="color: #94a3b8; margin: 5px 0 0; font-size: 12px;">Life Coaching with Pratima</p>
                     </div>
                 </div>
             `
@@ -163,14 +164,14 @@ app.post('/api/enquiry', emailLimiter, validateEnquiryForm, async (req, res) => 
         const templates = getEnquiryEmailTemplate({ name, email, phone, productName, message });
 
         const adminMailOptions = {
-            from: `"Happy Soul Website" <happysoulmotivator@gmail.com>`,
-            to: 'happysoulmotivator@gmail.com',
+            from: `"The Alchemy of Living Website" <lifenavigatorpratima@gmail.com>`,
+            to: 'lifenavigatorpratima@gmail.com',
             subject: templates.admin.subject,
             html: templates.admin.html
         };
 
         const userMailOptions = {
-            from: `"Happy Soul Team" <happysoulmotivator@gmail.com>`,
+            from: `"The Alchemy of Living Team" <lifenavigatorpratima@gmail.com>`,
             to: email,
             subject: templates.user.subject,
             html: templates.user.html
