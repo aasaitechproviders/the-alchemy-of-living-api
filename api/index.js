@@ -1,5 +1,5 @@
 // ============================================
-// BACKEND IMPLEMENTATION - THE ALCHEMY OF LIVING
+// BACKEND IMPLEMENTATION - THE ALCHEMY OF Your LIVING
 // ============================================
 
 const express = require('express');
@@ -59,11 +59,11 @@ transporter.verify((error) => {
 const getEnquiryEmailTemplate = (data) => {
     return {
         admin: {
-            subject: `New Product Enquiry - ${data.productName} - The Alchemy of Living`,
+            subject: `New Product Enquiry - ${data.productName} - The Alchemy of Your Living`,
             html: `
                 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #eee; border-radius: 8px; overflow: hidden;">
                     <div style="background: linear-gradient(135deg, #ff7e5f, #feb47b); padding: 20px; text-align: center;">
-                        <h1 style="color: white; margin: 0; font-size: 26px; font-weight: bold;">The Alchemy of Living</h1>
+                        <h1 style="color: white; margin: 0; font-size: 26px; font-weight: bold;">The Alchemy of Your Living</h1>
                         <p style="color: #fff8f0; margin: 5px 0 0; font-size: 14px; font-style: italic; font-family: 'Georgia', serif;">
                             Life Coaching with Pratima
                         </p>
@@ -98,18 +98,18 @@ const getEnquiryEmailTemplate = (data) => {
                         </table>
                     </div>
                     <div style="background: #1e293b; padding: 15px; text-align: center;">
-                        <p style="color: white; margin: 0; font-size: 14px;">&copy; 2025 The Alchemy of Living. All rights reserved.</p>
+                        <p style="color: white; margin: 0; font-size: 14px;">&copy; 2025 The Alchemy of Your Living. All rights reserved.</p>
                         <p style="color: #94a3b8; margin: 5px 0 0; font-size: 12px;">Life Coaching with Pratima</p>
                     </div>
                 </div>
             `
         },
         user: {
-            subject: `Thank You for Your Enquiry - The Alchemy of Living`,
+            subject: `Thank You for Your Enquiry - The Alchemy of Your Living`,
             html: `
                 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #eee; border-radius: 8px; overflow: hidden;">
                     <div style="background: linear-gradient(135deg, #ff7e5f, #feb47b); padding: 20px; text-align: center;">
-                        <h1 style="color: white; margin: 0; font-size: 26px; font-weight: bold;">The Alchemy of Living</h1>
+                        <h1 style="color: white; margin: 0; font-size: 26px; font-weight: bold;">The Alchemy of Your Living</h1>
                         <p style="color: #fff8f0; margin: 5px 0 0; font-size: 14px; font-style: italic; font-family: 'Georgia', serif;">
                             Life Coaching with Pratima
                         </p>
@@ -117,17 +117,17 @@ const getEnquiryEmailTemplate = (data) => {
                     <div style="padding: 25px; background: #f8fafc; line-height: 1.6; color: #333;">
                         <h2 style="color: #ff7e5f; margin-top: 0;">🙏 Thank You for Reaching Out!</h2>
                         <p>Dear ${data.name},</p>
-                        <p>Thank you for showing interest in <strong style="color: #ff7e5f;">${data.productName}</strong> at <strong>The Alchemy of Living</strong>.</p>
+                        <p>Thank you for showing interest in <strong style="color: #ff7e5f;">${data.productName}</strong> at <strong>The Alchemy of Your Living</strong>.</p>
                         <p>We have received your enquiry and our team will get back to you within <strong>1-2 business days</strong>.</p>
                         <div style="margin: 20px 0; padding: 15px; background: #fff; border-left: 4px solid #ff7e5f; border-radius: 5px;">
                             <p style="margin: 0;"><strong>Need help sooner?</strong><br>
                             📧 <a href="mailto:lifenavigatorpratima@gmail.com" style="color: #ff7e5f; text-decoration: none;">lifenavigatorpratima@gmail.com</a></p>
                         </div>
                         <p>Warm regards,<br>
-                        <strong style="color: #ff7e5f;">The Alchemy of Living Team</strong></p>
+                        <strong style="color: #ff7e5f;">The Alchemy of Your Living Team</strong></p>
                     </div>
                     <div style="background: #1e293b; padding: 15px; text-align: center;">
-                        <p style="color: white; margin: 0; font-size: 14px;">&copy; 2025 The Alchemy of Living. All rights reserved.</p>
+                        <p style="color: white; margin: 0; font-size: 14px;">&copy; 2025 The Alchemy of Your Living. All rights reserved.</p>
                         <p style="color: #94a3b8; margin: 5px 0 0; font-size: 12px;">Life Coaching with Pratima</p>
                     </div>
                 </div>
@@ -164,14 +164,14 @@ app.post('/api/enquiry', emailLimiter, validateEnquiryForm, async (req, res) => 
         const templates = getEnquiryEmailTemplate({ name, email, phone, productName, message });
 
         const adminMailOptions = {
-            from: `"The Alchemy of Living Website" <lifenavigatorpratima@gmail.com>`,
+            from: `"The Alchemy of Your Living Website" <lifenavigatorpratima@gmail.com>`,
             to: 'lifenavigatorpratima@gmail.com',
             subject: templates.admin.subject,
             html: templates.admin.html
         };
 
         const userMailOptions = {
-            from: `"The Alchemy of Living Team" <lifenavigatorpratima@gmail.com>`,
+            from: `"The Alchemy of Your Living Team" <lifenavigatorpratima@gmail.com>`,
             to: email,
             subject: templates.user.subject,
             html: templates.user.html
